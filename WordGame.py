@@ -9,8 +9,9 @@ app.secret_key='secret'
 
 @app.route('/')
 def home_page():
+    #initiate session variables
     session['badGuess'] = -1
-    session['hints'] = ''
+    session['hints'] = []
     return render_template('home_page.html')
 
 @app.route('/image', methods = ['POST', 'GET'])
@@ -27,9 +28,12 @@ def image_page():
             session['imageURL'] = image_dict['items'][0]['link']
             print(session.get('imageURL'))
             print(session.get('imageWord'))
+
+            #Generate underscores to indicate word length
             for i in range(len(session.get('imageWord'))):
-                session['hints'] = session['hints'] + '_ ' 
-            
+                session['hints'].append('_ ')
+
+        #Compare guess word to real query    
         guess = request.form.get("guess")
         if guess == session.get('imageWord'):
             isCorrect = 'Correct'
@@ -37,10 +41,17 @@ def image_page():
         else:
             session['badGuess'] += 1
             isCorrect = str(session.get('badGuess')) + ' tries made'
+            if session.get('badGuess') > 2:
+                #TODO: generate random letters
+                session['hints'][session.get('badGuess')-3] = session['imageWord'][session.get('badGuess')-3]
+
+
         
 
 
         
         
-    return render_template('image.html', image=session.get('imageURL'), correct=isCorrect, hints=session.get('hints'))
+    return render_template('image.html', image=session.get('imageURL'), correct=isCorrect, hints="".join(session['hints']))
 
+if __name__=='__main__':
+    app.run()

@@ -2,16 +2,27 @@
 <html>
 <head>
     <title>IMAGE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/imagestyle.css') }}">
 </head>
 <body>
-    <img src={{ image }} alt="image">
+    
+    <div class="flex-container">
+        <div>
+        <img src={{ image }} alt="image">
+        </div>
 
-    <form action="/image" method='POST'>
-    <input type="text" id="guess" name="guess">
-    <input type="submit" value="Make Guess" name="randomWord">
-    </form>
-    <b>{{ correct }}</b>
-    <b>{{ hints }}</b>
+        <div>
+        <form action="/image" method='POST'>
+        <input type="text" id="guess" name="guess">
+        <input type="submit" value="Make Guess" name="randomWord">
+        </form>
+        </div>
+
+        <div>
+        <b>{{ correct }}</b>
+        <b>{{ hints }}</b>
+        </div>
+    </div>
 
 </body>
 
