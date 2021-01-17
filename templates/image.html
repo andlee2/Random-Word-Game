@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IMAGE</title>
+</head>
+<body>
+    <img src={{ image }} alt="image">
+
+    <form action="/image" method='POST'>
+    <input type="text" id="guess" name="guess">
+    <input type="submit" value="Make Guess" name="randomWord">
+    </form>
+    <b>{{ correct }}</b>
+    <b>{{ hints }}</b>
+
+</body>
+
+
+</html>
