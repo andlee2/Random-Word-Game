@@ -55,7 +55,7 @@ def image_page():
                 session['letterHints'].remove(letterPositionNum)
                 session['hints'][letterPositionNum] = session['imageWord'][letterPositionNum]
             elif session.get('badGuess') >= (len(session.get('imageWord')) + 2):
-                session['gameStatus'] = 'You are a failure, the correct word was ' + session.get('imageWord')
+                session['gameStatus'] = 'You failed, the correct word was ' + session.get('imageWord')
                 return redirect('/gameover')
 
     return render_template('image.html', image=session.get('imageURL'), correct=isCorrect, hints="".join(session['hints']))
