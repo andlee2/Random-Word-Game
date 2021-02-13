@@ -24,7 +24,7 @@ def image_page():
         if request.form['randomWord'] == 'Random Word':
             responseWord = requests.get('https://random-word-api.herokuapp.com/word?number=1')
             session['imageWord'] = responseWord.json()[0]
-            API_KEY = 'AIzaSyDuAf7WIjldlxW2NvgXzZ9qZPLkukQmEsQ'
+            API_KEY = 'GoogleAPIKey'
             response = requests.get('https://www.googleapis.com/customsearch/v1?key=' + API_KEY + '&cx=006191701364648993407:mcl3f-voruw&searchType=image&q='+ session['imageWord'])
             image_dict = response.json()
             session['imageURL'] = image_dict['items'][0]['link']
